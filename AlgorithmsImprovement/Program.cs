@@ -8,10 +8,16 @@ namespace AlgorithmsImprovement
         {
             //Console.WriteLine("Hello World!");
             int[] priceArray = new int[] { 7, 8, 1, 7, 5 };
-            GetMaxProfit(priceArray);
+            //GetMaxProfit(priceArray);
             //start time 5:56PM
             //end time 6:41PM
+
+            PluralCourseTimeIntoEstimates.PerformPluralEstimateOperation();
+            Console.ReadLine();
         }
+
+
+
 
         /*Say you have an array for which the nth element is the price of a given day n.
         If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), 
