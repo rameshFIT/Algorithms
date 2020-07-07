@@ -16,14 +16,24 @@ namespace AlgorithmsImprovement
             try
             {
                 string timeHMS = Console.ReadLine();
-                var resultSeconds = CalculatepluralTimetoSeconds(timeHMS);
-                var rapMTSeconds = resultSeconds * rapMT;
-                var rapSeconds = resultSeconds * rap;
-                var resultRAPMT = CalculateTimeinHoursMinSec(rapMTSeconds);
-                var resultRAP = CalculateTimeinHoursMinSec(rapSeconds);
-                var rapMTDays = ConvertEstimateToDays(rapMTSeconds);
-                var rapDays = ConvertEstimateToDays(rapSeconds);
-                Console.WriteLine($"RAP(MT): Estimate is {resultRAPMT} or {rapMTDays} Day(s) and RAP: Estimate is {resultRAP} or {rapDays} Day(s).");
+                if(!timeHMS.Contains(','))
+                {
+                    var resultSeconds = CalculatepluralTimetoSeconds(timeHMS);
+                    var rapMTSeconds = resultSeconds * rapMT;
+                    var rapSeconds = resultSeconds * rap;
+                    var resultRAPMT = CalculateTimeinHoursMinSec(rapMTSeconds);
+                    var resultRAP = CalculateTimeinHoursMinSec(rapSeconds);
+                    var rapMTDays = ConvertEstimateToDays(rapMTSeconds);
+                    var rapDays = ConvertEstimateToDays(rapSeconds);
+                    Console.WriteLine($"RAP(MT): Estimate is {resultRAPMT} or {rapMTDays} Day(s) and RAP: Estimate is {resultRAP} or {rapDays} Day(s).");
+                }
+                else
+                {
+                    var resultTotalTimeSeconds = AddAllTime(timeHMS);
+                    var resultTotalTime = CalculateTimeinHoursMinSec(resultTotalTimeSeconds);
+                    Console.WriteLine($"The Final Value of Total time entered is {resultTotalTime}");
+                }
+                
             }
             catch (Exception ex)
             {
@@ -31,6 +41,18 @@ namespace AlgorithmsImprovement
                 Console.ReadLine();
             }
 
+        }
+
+        private static double AddAllTime(string timesHMS)
+        {            
+            var timesCollection = timesHMS.Split(',');
+            var totalTime = 0.0;
+            foreach (var item in timesCollection)
+            {
+                var resultSeconds = CalculatepluralTimetoSeconds(item);
+                totalTime += resultSeconds;
+            }
+            return totalTime;
         }
 
         private static double ConvertEstimateToDays(double totalSecondsValue)
